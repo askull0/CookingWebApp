@@ -1,38 +1,83 @@
-.App {
-  text-align: center;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header {
+    background-color: #278f41;
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+    font-size: 36px;
+    border-bottom: 2px solid #027926;
+    font-family: "Bookman Old Style", sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.content {
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: center;
+    background-color: #cef6da;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.footer {
+    background-color: #278f41;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    border-top: 2px solid #027926;
 }
 
-.App-link {
-  color: #61dafb;
+.container {
+    margin: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.logo {
+    width: 40px;
+    height: auto;
+    margin-right: 15px;
+}
+
+.search {
+    margin: 10px 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input {
+    width: 500px;
+    max-width: 100%;
+    margin: 0 auto;
+
+}
+
+.icon {
+    margin-bottom: 20px;
+}
+
+@media all and (max-width: 600px) {
+    .header {
+        font-size: 24px;
+        padding: 15px;
+    }
+
+    .content {
+        font-size: 18px;
+    }
+
+    .footer {
+        font-size: 12px;
+    }
+
+    .logo {
+        width: 30px;
+    }
+
+    .search-input {
+        width: 130%;
+    }
 }
