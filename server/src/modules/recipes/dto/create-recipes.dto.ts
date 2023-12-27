@@ -1,5 +1,4 @@
 import {
-  IsDate,
   IsNotEmpty,
   IsNumber,
   IsString,
@@ -17,10 +16,6 @@ export class CreateRecipesDto {
   @IsString()
   @MaxLength(680)
   description: string;
-
-  @IsNotEmpty()
-  // TODO @IsDate()
-  date: Date;
 
   @IsNotEmpty()
   @IsNumber()
