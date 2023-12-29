@@ -1,5 +1,5 @@
 import type {CSSProperties} from 'react';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {CaretRightOutlined, ClockCircleOutlined} from '@ant-design/icons';
 import type {CollapseProps} from 'antd';
 import {Collapse, Rate, theme, Tooltip} from 'antd';
@@ -8,8 +8,15 @@ import {SearchCulinaryRecipes} from "../features/Recipe/SearchCulinaryRecipes";
 import {IconTablePlus} from "@tabler/icons-react";
 import {useNavigate} from "react-router-dom";
 import {OpinionButton} from "./OpinionButton";
+import axios from 'axios';
 
-
+const getRecipes = () => {
+    axios.get('http://localhost:9000/recipes').then(res => {
+        console.log(res)
+    }).catch(error => {
+        console.log(error)
+    })
+}
 const text = `sth in the way`;
 const getItems: (panelStyle: CSSProperties
 ) => CollapseProps['items'] = (panelStyle) => [
@@ -75,6 +82,7 @@ const getItems: (panelStyle: CSSProperties
 
 export const CulinaryRecipes = () => {
     const {token} = theme.useToken();
+    const navigate = useNavigate();
 
     const panelStyle: React.CSSProperties = {
         marginBottom: 24,
@@ -83,7 +91,11 @@ export const CulinaryRecipes = () => {
         border: 'none',
     };
 
-    const navigate = useNavigate();
+    useEffect(() => {
+        getRecipes();
+    }, []);
+
+
     return (
         <div className="content">
             <div className="search">
