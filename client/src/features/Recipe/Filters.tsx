@@ -4,7 +4,12 @@ import React, {useState} from "react";
 const options1 = {increasing: "Increasing", decreasing: "Decreasing",};
 const options2 = {rating: "Rating", reviews: "Reviews", calories: "Calories",};
 
-export const Filters = () => {
+interface FiltersProps {
+    sortFilter: string | null;
+    pickFilter: string | null;
+}
+
+export const Filters: React.FC<FiltersProps> = ({sortFilter, pickFilter}) => {
     const sortingCombobox = useCombobox({
         onDropdownClose: () => sortingCombobox.resetSelectedOption(),
     });
