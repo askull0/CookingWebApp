@@ -1,19 +1,18 @@
 import type {CSSProperties} from 'react';
-import React, {useState} from 'react';
+import React from 'react';
 import {CaretRightOutlined, ClockCircleOutlined} from '@ant-design/icons';
 import type {CollapseProps} from 'antd';
-import {Collapse, theme, Tooltip} from 'antd';
-import {ActionIcon, Rating} from "@mantine/core";
+import {Collapse, Rate, theme, Tooltip} from 'antd';
+import {ActionIcon} from "@mantine/core";
 import {SearchCulinaryRecipes} from "../features/Recipe/SearchCulinaryRecipes";
 import {IconTablePlus} from "@tabler/icons-react";
 import {useNavigate} from "react-router-dom";
+import {OpinionButton} from "./OpinionButton";
 
 
 const text = `sth in the way`;
-const getItems: (panelStyle: CSSProperties,
-                 values: number[],
-                 setValues: React.Dispatch<React.SetStateAction<number[]>>
-) => CollapseProps['items'] = (panelStyle, values, setValues) => [
+const getItems: (panelStyle: CSSProperties
+) => CollapseProps['items'] = (panelStyle) => [
     {
         key: '1',
         label: 'This is panel header 1',
@@ -21,12 +20,14 @@ const getItems: (panelStyle: CSSProperties,
             <>
                 <p>{text}</p>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>
-                    <Rating value={values[0]} onChange={(value) => setValues([value, values[1], values[2]])}/>
+                    <Rate disabled defaultValue={2}/>
                     <Tooltip title="Preparation time">
                         <ClockCircleOutlined style={{marginRight: '10px'}}/>
                         <span>5 min</span>
                     </Tooltip>
+                    <OpinionButton index={0}/>
                 </div>
+
             </>
         ),
         style: panelStyle,
@@ -38,11 +39,13 @@ const getItems: (panelStyle: CSSProperties,
             <>
                 <p>{text}</p>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>
-                    <Rating value={values[1]} onChange={(value) => setValues([values[0], value, values[2]])}/>
+                    <Rate disabled defaultValue={4}/>
                     <Tooltip title="Preparation time">
                         <ClockCircleOutlined style={{marginRight: '8px'}}/>
                         <span>50 min</span>
                     </Tooltip>
+                    <OpinionButton index={1}/>
+
                 </div>
             </>
         ),
@@ -55,11 +58,13 @@ const getItems: (panelStyle: CSSProperties,
             <>
                 <p>{text}</p>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>
-                    <Rating value={values[2]} onChange={(value) => setValues([values[0], values[1], value])}/>
+                    <Rate disabled defaultValue={5}/>
                     <Tooltip title="Preparation time">
                         <ClockCircleOutlined style={{marginRight: '8px'}}/>
                         <span>20 min</span>
                     </Tooltip>
+                    <OpinionButton index={2}/>
+
                 </div>
             </>
         ),
@@ -70,7 +75,6 @@ const getItems: (panelStyle: CSSProperties,
 
 export const CulinaryRecipes = () => {
     const {token} = theme.useToken();
-    const [values, setValues] = useState([0, 0, 0]);
 
     const panelStyle: React.CSSProperties = {
         marginBottom: 24,
@@ -97,7 +101,7 @@ export const CulinaryRecipes = () => {
             <Collapse
                 bordered={false}
                 expandIcon={({isActive}) => <CaretRightOutlined rotate={isActive ? 90 : 0}/>}
-                items={getItems(panelStyle, values, setValues)}
+                items={getItems(panelStyle)}
             />
         </div>
     );

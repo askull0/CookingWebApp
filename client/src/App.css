@@ -15,7 +15,6 @@ body {
 }
 
 .content {
-
     padding: 20px;
     font-size: 18px;
     line-height: 1.6;
@@ -72,6 +71,7 @@ body {
     margin: 10px;
 }
 
+
 @media all and (max-width: 600px) {
     .header {
         font-size: 24px;
@@ -92,5 +92,9 @@ body {
 
     .search-input {
         width: 130%;
+    }
+
+    .sign-in {
+        width: 50%;
     }
 }

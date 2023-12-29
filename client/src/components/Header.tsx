@@ -6,5 +6,6 @@ export const Header = () => {
             <img src={logoImage} alt="logo" className="logo"/>
             Culinary recipes
         </div>
+
     )
 }

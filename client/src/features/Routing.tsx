@@ -3,6 +3,8 @@ import {Layout} from "../components/Layout";
 import {ErrorPage} from "./error/ErrorPage";
 import {RecipeForm} from "./Recipe/RecipeForm";
 import {CulinaryRecipes} from "../components/CulinaryRecipes";
+import {SignInPage} from "./Recipe/SignInPage";
+import {RegisterPage} from "./Recipe/RegisterPage";
 
 const routes: RouteObject[] = [
     {
@@ -14,12 +16,12 @@ const routes: RouteObject[] = [
                 element: <CulinaryRecipes/>
             },
             {
-                path: '/singin',
-                //element:
+                path: '/signin',
+                element: <SignInPage/>
             },
             {
                 path: '/register',
-                //element:
+                element: <RegisterPage/>
             },
             {
                 path: '/myaccount',
