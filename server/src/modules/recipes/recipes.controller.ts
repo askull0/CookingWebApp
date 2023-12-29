@@ -14,7 +14,7 @@ import { RecipeNotfoundException } from '../../exceptions/recipe-notfound-except
 import { FilterRecipesDto } from './dto/filter-recipes.dto';
 import { RateRecipeDto } from './dto/rate-recipe.dto';
 
-@Controller('recipes')
+@Controller('api/v1/recipes')
 export class RecipesController {
   constructor(private recipesService: RecipesService) {}
 
