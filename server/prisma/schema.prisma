@@ -11,15 +11,38 @@ datasource db {
 }
 
 model Recipes {
-  id             Int       @id @default(autoincrement())
-  name           String    @db.VarChar(76)
-  rating         Float
-  reviews        Int
-  description    String    @db.VarChar(680)
-  publishedDate  DateTime  @default(now())
-  totalTime      Int
-  calories       Int
-  fat            Int
-  carbs          Int
-  protein        Int
+  id            Int       @id @default(autoincrement())
+  name          String    @db.VarChar(76)
+  rating        Float
+  reviews       Int
+  description   String    @db.VarChar(680)
+  publishedDate DateTime  @default(now())
+  totalTime     Int
+  calories      Int
+  fat           Int
+  carbs         Int
+  protein       Int
+  comments      Comment[]
+  User          User?     @relation(fields: [userId], references: [id])
+  userId        Int?
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  firstName String    @db.VarChar(50)
+  lastName  String    @db.VarChar(50)
+  email     String    @unique
+  password  String
+  comments  Comment[]
+  recipes   Recipes[]
+}
+
+model Comment {
+  id            Int      @id @default(autoincrement())
+  author        User     @relation(fields: [authorId], references: [id])
+  authorId      Int
+  text          String
+  publishedDate DateTime @default(now())
+  recipes       Recipes  @relation(fields: [recipesId], references: [id])
+  recipesId     Int
 }
