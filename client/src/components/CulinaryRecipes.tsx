@@ -12,6 +12,7 @@ import axios from '../axios.js';
 
 
 interface Recipe {
+    id?: number;
     name: string;
     rating: number;
     description: string;
@@ -99,7 +100,7 @@ export const CulinaryRecipes = () => {
                             <ClockCircleOutlined style={{marginRight: '8px'}}/>
                             <span>{recipe.totalTime} min</span>
                         </Tooltip>
-                        <OpinionButton index={index}/>
+                        <OpinionButton data={{index, id: recipe.id}}/>
                     </div>
                 </>
             ),
@@ -111,7 +112,8 @@ export const CulinaryRecipes = () => {
         <div className="content">
             <div className="search">
                 <div style={{display: 'flex', flexDirection: 'column'}}>
-                    <SearchCulinaryRecipes setSearchFilter={setSearchFilter}/>
+                    <SearchCulinaryRecipes setSearchFilter={setSearchFilter} setSortFilter={setSortFilter}
+                                           setPickFilter={setPickFilter}/>
                 </div>
                 <ActionIcon onClick={() => navigate('/new')} className="icon" variant="filled" color="#027926"
                             size="lg"

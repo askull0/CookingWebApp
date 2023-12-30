@@ -5,6 +5,7 @@ import {RecipeForm} from "./Recipe/RecipeForm";
 import {CulinaryRecipes} from "../components/CulinaryRecipes";
 import {SignInPage} from "./Recipe/SignInPage";
 import {RegisterPage} from "./Recipe/RegisterPage";
+import {RecipesIdPage} from "./Recipe/RecipesIdPage";
 
 const routes: RouteObject[] = [
     {
@@ -22,6 +23,10 @@ const routes: RouteObject[] = [
             {
                 path: '/register',
                 element: <RegisterPage/>
+            },
+            {
+                path: '/:id',
+                element: <RecipesIdPage/>
             },
             {
                 path: '/myaccount',

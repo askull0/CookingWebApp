@@ -9,11 +9,15 @@ const {Search} = Input;
 
 interface SearchCulinaryRecipesProps {
     setSearchFilter: React.Dispatch<React.SetStateAction<string | null>>;
+    setSortFilter: React.Dispatch<React.SetStateAction<string | null>>;
+    setPickFilter: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-export const SearchCulinaryRecipes: React.FC<SearchCulinaryRecipesProps> = ({setSearchFilter}) => {
-    const [sortFilter, setSortFilter] = useState<string | null>(null);
-    const [pickFilter, setPickFilter] = useState<string | null>(null);
+export const SearchCulinaryRecipes: React.FC<SearchCulinaryRecipesProps> = ({
+                                                                                setSearchFilter,
+                                                                                setSortFilter,
+                                                                                setPickFilter
+                                                                            }) => {
     const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
         setSearchFilter(value);
     };
@@ -25,7 +29,7 @@ export const SearchCulinaryRecipes: React.FC<SearchCulinaryRecipesProps> = ({set
                     <Search placeholder="search culinary recipes" onSearch={onSearch} className="search-input"/>
                 </Space>
             </div>
-            <Filters sortFilter={sortFilter} pickFilter={pickFilter}/>
+            <Filters setSortFilter={setSortFilter} setPickFilter={setPickFilter}/>
         </div>
     );
 };

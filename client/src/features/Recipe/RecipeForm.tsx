@@ -1,9 +1,29 @@
-import {ActionIcon, Box, Button, NumberInput, Textarea, TextInput} from "@mantine/core";
+import {ActionIcon, Box, Button, NumberInput, Textarea, TextInput, Modal} from "@mantine/core";
 import {useForm} from "@mantine/form";
 import {IconSquareX} from "@tabler/icons-react";
 import {useNavigate} from "react-router-dom";
+import axios, {AxiosResponse} from "axios";
+import {useState} from "react";
+
+
+interface Recipe {
+    name: string;
+    description: string;
+    totalTime: number;
+    calories: number;
+    fat: number;
+    carbs: number;
+    protein: number;
+    rating?: number;
+    reviews?: number;
+}
 
 export const RecipeForm = () => {
+    const [recipes, setRecipes] = useState<Recipe[]>([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+    const navigate = useNavigate();
+
     const form = useForm({
         initialValues: {
             recipeName: '',
@@ -25,14 +45,41 @@ export const RecipeForm = () => {
         },
     });
 
-    const navigate = useNavigate();
+    const handleSubmit = async () => {
+        try {
+            const response: AxiosResponse<Recipe> = await axios.post('/recipes', {
+                "name": form.values.recipeName,
+                "description": form.values.description,
+                "totalTime": form.values.cookingTime,
+                "calories": form.values.calories,
+                "fat": form.values.fat,
+                "carbs": form.values.carbs,
+                "protein": form.values.protein,
+            });
+            const {rating, reviews, ...rest} = response.data;
+            setRecipes([...recipes, response.data]);
+            /*navigate('/${response.data.id}');*/
+            setSelectedRecipe(response.data);
+            setModalOpen(true);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const closeModal = () => {
+        setModalOpen(false);
+        setSelectedRecipe(null);
+        navigate("/");
+    };
 
     return (
         <div className="content">
             Please add new recipe
 
             <Box maw={340} mx="auto">
-                <form onSubmit={form.onSubmit(console.log)}>
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    form.onSubmit(handleSubmit)();
+                }}>
                     <TextInput mt="sm" label="Recipe Name"
                                placeholder="Enter recipe name" {...form.getInputProps('recipeName')} />
                     <Textarea mt="sm" label="Description"
@@ -48,7 +95,7 @@ export const RecipeForm = () => {
                         <NumberInput label="Protein" min={0} {...form.getInputProps('protein')} />
                     </Box>
                     <NumberInput mt="sm" label="Calories"
-                                 min={0}  {...form.getInputProps('Calories')}
+                                 min={0}  {...form.getInputProps('calories')}
                     />
                     <Button type="submit" mt="md" color="#027926">
                         Submit
@@ -59,7 +106,26 @@ export const RecipeForm = () => {
                         color="#027926">
                 <IconSquareX style={{width: '70%', height: '70%'}} stroke={1.5}/>
             </ActionIcon>
-
+            <Modal
+                title="Dodano nowy przepis!!"
+                opened={modalOpen}
+                onClose={closeModal}
+                size="md"
+            >
+                {selectedRecipe && (
+                    <div className="content">
+                        <div>Name: {selectedRecipe.name}</div>
+                        <div>Description: {selectedRecipe.description}</div>
+                        <div>Total Time: {selectedRecipe.totalTime} minutes</div>
+                        <div>Calories: {selectedRecipe.calories}</div>
+                        <div>Fat: {selectedRecipe.fat}</div>
+                        <div>Carbs: {selectedRecipe.carbs}</div>
+                        <div>Protein: {selectedRecipe.protein}</div>
+                        <div>Rating: {selectedRecipe.rating}</div>
+                        <div>Reviews: {selectedRecipe.reviews}</div>
+                    </div>
+                )}
+            </Modal>
         </div>
 
     )

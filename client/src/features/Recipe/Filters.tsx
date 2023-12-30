@@ -5,11 +5,11 @@ const options1 = {increasing: "Increasing", decreasing: "Decreasing",};
 const options2 = {rating: "Rating", reviews: "Reviews", calories: "Calories",};
 
 interface FiltersProps {
-    sortFilter: string | null;
-    pickFilter: string | null;
+    setSortFilter: React.Dispatch<React.SetStateAction<string | null>>;
+    setPickFilter: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-export const Filters: React.FC<FiltersProps> = ({sortFilter, pickFilter}) => {
+export const Filters: React.FC<FiltersProps> = ({setSortFilter, setPickFilter}) => {
     const sortingCombobox = useCombobox({
         onDropdownClose: () => sortingCombobox.resetSelectedOption(),
     });
@@ -33,6 +33,11 @@ export const Filters: React.FC<FiltersProps> = ({sortFilter, pickFilter}) => {
             {label}
         </Combobox.Option>
     ));
+
+    const handleConfirmClick = () => {
+        setSortFilter(sortingValue);
+        setPickFilter(otherSortingValue);
+    };
 
     return (
         <div className="filters">
@@ -88,6 +93,7 @@ export const Filters: React.FC<FiltersProps> = ({sortFilter, pickFilter}) => {
                     <Combobox.Options>{optionsComponents2}</Combobox.Options>
                 </Combobox.Dropdown>
             </Combobox>
+            {/*  <button onClick={handleConfirmClick}>Confirm</button>*/}
         </div>
     );
 };
