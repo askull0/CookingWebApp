@@ -3,6 +3,7 @@ import { CreateRecipesDto } from './dto/create-recipes.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { FilterRecipesDto } from './dto/filter-recipes.dto';
 import { RateRecipeDto } from './dto/rate-recipe.dto';
+import { CreateCommentDto } from '../comments/dto/create-comment.dto';
 
 @Injectable()
 export class RecipesService {

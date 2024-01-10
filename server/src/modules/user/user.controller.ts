@@ -14,7 +14,7 @@ import { UserDto } from './dto/user.dto';
 import { UserID } from '../auth/decorators/userdId.decorator';
 import { TokenGuard } from '../auth/guards/token.guard';
 
-@Controller('api/v1/users')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

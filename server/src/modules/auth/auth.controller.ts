@@ -4,7 +4,7 @@ import { UserID, UserName } from './decorators/userdId.decorator';
 import { TokenService } from '../token/token.service';
 import { Response } from 'express';
 
-@Controller('api/v1/auth')
+@Controller('auth')
 export class AuthController {
   constructor(private readonly tokenService: TokenService) {}
   @Post('login')
