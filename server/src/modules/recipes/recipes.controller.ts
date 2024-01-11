@@ -13,8 +13,9 @@ import { CreateRecipesDto } from './dto/create-recipes.dto';
 import { RecipeNotfoundException } from '../../exceptions/recipe-notfound-exception';
 import { FilterRecipesDto } from './dto/filter-recipes.dto';
 import { RateRecipeDto } from './dto/rate-recipe.dto';
+import { plainToInstance } from 'class-transformer';
 
-@Controller('api/v1/recipes')
+@Controller('recipes')
 export class RecipesController {
   constructor(private recipesService: RecipesService) {}
 
@@ -48,6 +49,6 @@ export class RecipesController {
   ) {
     const recipe = await this.recipesService.updateRating(id, data);
     if (!recipe) throw new RecipeNotfoundException();
-    return recipe;
+    return plainToInstance(RateRecipeDto, recipe);
   }
 }

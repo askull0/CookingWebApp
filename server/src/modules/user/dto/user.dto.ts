@@ -4,8 +4,6 @@ import {
   IsNotEmpty,
   IsNumber,
   IsString,
-  MaxLength,
-  MinLength,
 } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import { User } from '@prisma/client';
