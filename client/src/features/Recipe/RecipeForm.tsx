@@ -5,7 +5,6 @@ import {useNavigate} from "react-router-dom";
 import axios, {AxiosResponse} from "axios";
 import {useState} from "react";
 
-
 interface Recipe {
     name: string;
     description: string;
@@ -58,7 +57,6 @@ export const RecipeForm = () => {
             });
             const {rating, reviews, ...rest} = response.data;
             setRecipes([...recipes, response.data]);
-            /*navigate('/${response.data.id}');*/
             setSelectedRecipe(response.data);
             setModalOpen(true);
         } catch (error) {

@@ -37,13 +37,17 @@ export const Footer = () => {
                     </Group>
 
                     <Group gap="xs" justify="flex-end">
-                        <ActionIcon size="lg" variant="default" radius="xl" style={{background: '#cef6da'}}>
-                            <IconBrandTwitter style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
+                        <ActionIcon size="lg" variant="default" radius="xl"
+                                    style={{background: 'linear-gradient(to right, #cef6da, #6c9f7c)'}}>
+                            <IconBrandTwitter style={{width: rem(18), height: rem(18)}}
+                                              stroke={1.5}/>
                         </ActionIcon>
-                        <ActionIcon size="lg" variant="default" radius="xl" style={{background: '#cef6da'}}>
+                        <ActionIcon size="lg" variant="default" radius="xl"
+                                    style={{background: 'linear-gradient(to right, #cef6da, #6c9f7c)'}}>
                             <IconBrandYoutube style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
                         </ActionIcon>
-                        <ActionIcon size="lg" variant="default" radius="xl" style={{background: '#cef6da'}}>
+                        <ActionIcon size="lg" variant="default" radius="xl"
+                                    style={{background: 'linear-gradient(to right, #cef6da, #6c9f7c)'}}>
                             <IconBrandInstagram style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
                         </ActionIcon>
                     </Group>

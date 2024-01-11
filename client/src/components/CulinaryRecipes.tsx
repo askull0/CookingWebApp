@@ -7,8 +7,10 @@ import {ActionIcon} from "@mantine/core";
 import {SearchCulinaryRecipes} from "../features/Recipe/SearchCulinaryRecipes";
 import {IconBaguette, IconBurger, IconEggs, IconFlame, IconTablePlus} from "@tabler/icons-react";
 import {useNavigate} from "react-router-dom";
-import {OpinionButton} from "./OpinionButton";
 import axios from '../axios.js';
+import {ScrollToTopButton} from "./ScrollTopButton";
+import {RateButton} from "./RateButton";
+import {CommentButton} from "./CommentButton";
 
 
 interface Recipe {
@@ -31,6 +33,8 @@ export const CulinaryRecipes = () => {
     const [searchFilter, setSearchFilter] = useState<string | null>(null);
     const [sortFilter, setSortFilter] = useState<string | null>(null);
     const [pickFilter, setPickFilter] = useState<string | null>(null);
+
+    //aktulizacja
 
     const panelStyle: React.CSSProperties = {
         marginBottom: 24,
@@ -91,16 +95,26 @@ export const CulinaryRecipes = () => {
                     </span>
 
                     </div>
-                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>
-                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',}}>
+                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <div style={{display: 'flex', alignItems: 'center'}}>
                             <Rate disabled defaultValue={recipe.rating} style={{marginRight: '6px'}}/>
-                            ({recipe.reviews})
+                            <span>({recipe.reviews})</span>
                         </div>
-                        <Tooltip title="Preparation time">
-                            <ClockCircleOutlined style={{marginRight: '8px'}}/>
-                            <span>{recipe.totalTime} min</span>
-                        </Tooltip>
-                        <OpinionButton data={{index, id: recipe.id}}/>
+
+                        <div style={{display: 'flex', alignItems: 'center'}}>
+                            <Tooltip title="Preparation time">
+                                <ClockCircleOutlined style={{marginRight: '8px'}}/>
+                                <span>{recipe.totalTime} min</span>
+                            </Tooltip>
+                        </div>
+
+                        <div style={{display: 'flex', alignItems: 'center'}}>
+                            <div style={{display: 'flex', marginRight: '8px'}}>
+                                <RateButton id={recipe.id}/>
+                            </div>
+                            <CommentButton data={{index}}
+                            />
+                        </div>
                     </div>
                 </>
             ),
@@ -115,12 +129,14 @@ export const CulinaryRecipes = () => {
                     <SearchCulinaryRecipes setSearchFilter={setSearchFilter} setSortFilter={setSortFilter}
                                            setPickFilter={setPickFilter}/>
                 </div>
-                <ActionIcon onClick={() => navigate('/new')} className="icon" variant="filled" color="#027926"
-                            size="lg"
-                            radius="md"
-                            aria-label="Settings">
-                    <IconTablePlus style={{width: '70%', height: '70%'}} stroke={1.5}/>
-                </ActionIcon>
+                <Tooltip title="Add new recipe">
+                    <ActionIcon onClick={() => navigate('/new')} className="icon" variant="filled" color="#027926"
+                                size="lg"
+                                radius="md"
+                                aria-label="Settings">
+                        <IconTablePlus style={{width: '70%', height: '70%'}} stroke={1.5}/>
+                    </ActionIcon>
+                </Tooltip>
             </div>
 
             <Collapse
@@ -128,6 +144,7 @@ export const CulinaryRecipes = () => {
                 expandIcon={({isActive}) => <CaretRightOutlined rotate={isActive ? 90 : 0}/>}
                 items={getItems(panelStyle)}
             />
+            <ScrollToTopButton/>
         </div>
     );
 };
