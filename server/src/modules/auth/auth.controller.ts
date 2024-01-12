@@ -1,4 +1,11 @@
-import { Controller, Post, Res, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { BasicGuard } from './guards/basic.guard';
 import { UserID, UserName } from './decorators/userdId.decorator';
 import { TokenService } from '../token/token.service';
@@ -9,6 +16,7 @@ export class AuthController {
   constructor(private readonly tokenService: TokenService) {}
   @Post('login')
   @UseGuards(BasicGuard)
+  @HttpCode(HttpStatus.OK)
   //generowanie tokenu - zwraca void, ale ustawia cookies
   login(
     @UserID() id: number,
@@ -29,6 +37,7 @@ export class AuthController {
   }
 
   @Post('logout')
+  @HttpCode(HttpStatus.OK)
   logout(@Res({ passthrough: true }) resp: Response) {
     resp.clearCookie('access-token');
     resp.clearCookie('is-logged');
