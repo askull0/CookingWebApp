@@ -6,12 +6,20 @@ body {
 
 .header {
     background: linear-gradient(to right, #39b257, #027926);
+    display: flex;
+    justify-content: space-between;
     color: #fff;
     text-align: center;
     padding: 30px;
     font-size: 36px;
     border-bottom: 2px solid #027926; /*199640*/
     font-family: "Bookman Old Style", sans-serif;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
 }
 
 .content {

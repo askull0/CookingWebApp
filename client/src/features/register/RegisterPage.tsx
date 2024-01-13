@@ -1,8 +1,13 @@
 import {useForm} from '@mantine/form';
 import {PasswordInput, Group, Button, Box, TextInput} from '@mantine/core';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import React from "react";
+import {registerErrorNotification} from "./notifications_register";
+import axios from "axios";
+import {login} from "../login/api/login";
 
 export const RegisterPage = () => {
+    const navigate = useNavigate();
     const form = useForm({
         initialValues: {
             firstName: '',
@@ -12,7 +17,7 @@ export const RegisterPage = () => {
             confirmPassword: '',
         },
         validate: {
-            password: (value) => (value.length < 6 ? 'Password must have at least 6 characters' : null),
+            password: (value) => (value.length < 8 ? 'Password must have at least 8 characters' : null),
             confirmPassword: (value, values) =>
                 value !== values.password ? 'Passwords did not match' : null,
             firstName: (value) => (value.length === 0 ? 'First name is required' : null),
@@ -22,11 +27,23 @@ export const RegisterPage = () => {
         },
     });
 
+    const handleSubmit = async () => {
+        try {
+            const {firstName, lastName, email, password} = form.values;
+            const response = await axios.post('/users', {firstName, lastName, email, password});
+            await login(email, password);
+            navigate('/recipe');
+
+        } catch (error) {
+            console.error('Registration error:', error);
+            registerErrorNotification();
+        }
+    };
     return (
         <div className="content">
             <h2>Create an account</h2>
             <Box maw={340} mx="auto" className="sign-in">
-                <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                <form onSubmit={form.onSubmit(() => handleSubmit())}>
                     <TextInput
                         label="First Name"
                         placeholder="Enter your first name"
@@ -61,6 +78,7 @@ export const RegisterPage = () => {
                         placeholder="Confirm password"
                         {...form.getInputProps('confirmPassword')}
                         style={{marginBottom: '24px'}}
+
                     />
 
                     <Group mt="md" style={{justifyContent: 'center'}}>

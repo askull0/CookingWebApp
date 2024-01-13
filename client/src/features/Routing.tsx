@@ -3,7 +3,7 @@ import {Layout} from "../components/Layout";
 import {ErrorPage} from "./error/ErrorPage";
 import {RecipeForm} from "./Recipe/RecipeForm";
 import {CulinaryRecipes} from "../components/CulinaryRecipes";
-import {RegisterPage} from "./Recipe/RegisterPage";
+import {RegisterPage} from "./register/RegisterPage";
 import {useIsLogged} from "../hooks/useIsLogged";
 import {LogInPage} from "./login/LogInPage";
 
@@ -13,8 +13,20 @@ const publicRoutes: RouteObject[] = [ //gdy uzytkownik jest poprawnie uwierzytel
         element: <Layout/>,
         children: [
             {
+                path: '/',
+                element: <Navigate to="/recipe" replace/>,
+            },
+            {
+                path: '/recipe',
+                element: <CulinaryRecipes/>
+            },
+            {
                 path: '/login',
                 element: <LogInPage/>
+            },
+            {
+                path: '/register',
+                element: <RegisterPage/>
             },
             {
                 path: '*',
@@ -32,11 +44,6 @@ const privateRoutes: RouteObject[] = [
             {
                 path: '/recipe',
                 element: <CulinaryRecipes/>
-            },
-
-            {
-                path: '/register',
-                element: <RegisterPage/>
             },
             {
                 path: '/myaccount',

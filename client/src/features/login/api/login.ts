@@ -1,7 +1,6 @@
 import {API_URL} from "../../../config";
 
-export const login = async (/*firstname: string,*/ email: string, password: string) => {
-    console.log(email + ' ' + password)
+export const login = async (email: string, password: string) => {
     const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: {
@@ -10,7 +9,6 @@ export const login = async (/*firstname: string,*/ email: string, password: stri
         },
         credentials: 'include'
     });
-    console.log(window.btoa(email + ":" + password));
     if (response.status !== 200) throw new Error('Login failed ...');
     return await response.text();
 }

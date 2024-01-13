@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Button, Input, message, Modal, Rate} from "antd";
-import axios from "../axios";
+import axios from "axios";
 
 interface RateButtonProps {
     id: number | undefined;
@@ -30,8 +30,6 @@ export const RateButton: React.FC<RateButtonProps> = ({id}) => {
             console.error("Error updating rating:", error);
             message.error("Something went wrong. Please try again.");
         }
-
-
     };
     const handleRatingChange = (value: number) => {
         setRatingValue(value);

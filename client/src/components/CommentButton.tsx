@@ -3,12 +3,10 @@ import {Button, Input, message, Modal, Rate} from "antd";
 import axios from "axios";
 
 interface CommentButtonProps {
-    data: {
-        index: number;
-    };
+    id: number | undefined;
 }
 
-export const CommentButton: React.FC<CommentButtonProps> = ({data}) => {
+export const CommentButton: React.FC<CommentButtonProps> = ({id}) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [comment, setComment] = useState('');
     const showModal = () => {

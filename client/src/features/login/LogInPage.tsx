@@ -6,23 +6,21 @@ import {login} from "./api/login";
 import {loginErrorNotification} from "./notifications";
 
 type FieldType = {
-    //  firstname: string;
     login: string;
     password: string;
 };
 
 export const LogInPage = () => {
     const navigate = useNavigate();
-    const form = useForm<FieldType>({
-        initialValues: {
-            //firstname: "",
-            login: "",
-            password: ""
-        }
-    })
+    /*    const form = useForm<FieldType>({
+            initialValues: {
+                login: "",
+                password: ""
+            }
+        })*/
     const handleSubmit = async (data: FieldType) => {
         try {
-            await login(/*data.firstname,*/ data.login, data.password);
+            await login(data.login, data.password);
             navigate('/recipe');
         } catch (error) {
             loginErrorNotification();
@@ -40,13 +38,6 @@ export const LogInPage = () => {
                 onFinish={(values) => handleSubmit(values)}
                 autoComplete="off"
             >
-                {/*  <Form.Item<FieldType>
-                    label="First Name"
-                    name="firstname"
-                    rules={[{required: true, message: 'Please input your first name!'}]}
-                >
-                    <Input placeholder="Enter your first name"/>
-                </Form.Item>*/}
 
                 <Form.Item<FieldType>
                     label="Email"

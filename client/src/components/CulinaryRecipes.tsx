@@ -7,10 +7,12 @@ import {ActionIcon} from "@mantine/core";
 import {SearchCulinaryRecipes} from "../features/Recipe/SearchCulinaryRecipes";
 import {IconBaguette, IconBurger, IconEggs, IconFlame, IconTablePlus} from "@tabler/icons-react";
 import {useNavigate} from "react-router-dom";
-import axios from '../axios.js';
+/*import axios from '../axios.js';*/
 import {ScrollToTopButton} from "./ScrollTopButton";
 import {RateButton} from "./RateButton";
 import {CommentButton} from "./CommentButton";
+import {DisplayComment} from "./DisplayComment";
+import axios from "axios";
 
 
 interface Recipe {
@@ -112,9 +114,11 @@ export const CulinaryRecipes = () => {
                             <div style={{display: 'flex', marginRight: '8px'}}>
                                 <RateButton id={recipe.id}/>
                             </div>
-                            <CommentButton data={{index}}
-                            />
+                            <CommentButton id={recipe.id}/>
                         </div>
+                    </div>
+                    <div>
+                        <DisplayComment/>
                     </div>
                 </>
             ),
