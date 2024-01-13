@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as argon2 from 'argon2';
@@ -34,5 +34,19 @@ export class UserService {
 
   findUser(id: number) {
     return this.prisma.user.findUnique({ where: { id } });
+  }
+
+  async findMyRecipes(id: number) {
+    return this.prisma.recipes.findMany({ where: { userId: id } });
+  }
+
+  async deleteMyRecipe(id: number, userId: number) {
+    const recipe = await this.prisma.recipes.findUnique({
+      where: { id: id },
+    });
+    if (!recipe) return null;
+    if (recipe.userId == userId) {
+      return this.prisma.recipes.delete({ where: { id: id } });
+    } else throw new ConflictException();
   }
 }

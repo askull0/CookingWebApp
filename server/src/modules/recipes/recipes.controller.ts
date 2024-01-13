@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
 import { CreateRecipesDto } from './dto/create-recipes.dto';
@@ -14,6 +15,8 @@ import { RecipeNotfoundException } from '../../exceptions/recipe-notfound-except
 import { FilterRecipesDto } from './dto/filter-recipes.dto';
 import { RateRecipeDto } from './dto/rate-recipe.dto';
 import { plainToInstance } from 'class-transformer';
+import { TokenGuard } from '../auth/guards/token.guard';
+import { UserID } from '../auth/decorators/userdId.decorator';
 
 @Controller('recipes')
 export class RecipesController {
@@ -37,12 +40,14 @@ export class RecipesController {
 
   // zwraca utworzony przepis
   @Post()
-  postRecipe(@Body() data: CreateRecipesDto) {
-    return this.recipesService.createNewRecipe(data);
+  @UseGuards(TokenGuard)
+  postRecipe(@Body() data: CreateRecipesDto, @UserID() id: number) {
+    return this.recipesService.createNewRecipe(data, id);
   }
 
   // zwraca zaktualizowany przepis
   @Put('rating/:id')
+  @UseGuards(TokenGuard)
   async rateRecipe(
     @Param('id', ParseIntPipe) id: number,
     @Body() data: RateRecipeDto,

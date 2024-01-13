@@ -48,7 +48,7 @@ export class RecipesService {
       orderBy: orderByClause,
     });
   }
-  async createNewRecipe(data: CreateRecipesDto) {
+  async createNewRecipe(data: CreateRecipesDto, id: number) {
     return this.prisma.recipes.create({
       data: {
         name: data.name,
@@ -60,6 +60,7 @@ export class RecipesService {
         protein: data.protein,
         rating: 0,
         reviews: 0,
+        userId: id,
       },
     });
   }

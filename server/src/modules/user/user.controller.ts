@@ -1,8 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
+  Param,
+  ParseIntPipe,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -13,6 +16,7 @@ import { plainToInstance } from 'class-transformer';
 import { UserDto } from './dto/user.dto';
 import { UserID } from '../auth/decorators/userdId.decorator';
 import { TokenGuard } from '../auth/guards/token.guard';
+import { RecipeNotfoundException } from '../../exceptions/recipe-notfound-exception';
 
 @Controller('users')
 export class UserController {
@@ -35,5 +39,28 @@ export class UserController {
     const me = await this.userService.findUser(id);
     if (!me) throw new NotFoundException();
     return plainToInstance(UserDto, me);
+  }
+
+  @Get('/recipes')
+  @UseGuards(TokenGuard)
+  async getRecipesByUserId(@UserID() id: number) {
+    const recipes = await this.userService.findMyRecipes(id);
+    if (recipes.length == 0) throw new RecipeNotfoundException();
+    return recipes;
+  }
+
+  @Delete('recipes/:id')
+  @UseGuards(TokenGuard)
+  async deleteRecipeById(
+    @Param('id', ParseIntPipe) id: number,
+    @UserID() userId: number,
+  ) {
+    try {
+      const recipe = await this.userService.deleteMyRecipe(id, userId);
+      if (!recipe) throw new NotFoundException();
+      return recipe;
+    } catch (error) {
+      rethrow(error);
+    }
   }
 }

@@ -17,7 +17,7 @@ export class AuthController {
   @Post('login')
   @UseGuards(BasicGuard)
   @HttpCode(HttpStatus.OK)
-  //generowanie tokenu - zwraca void, ale ustawia cookies
+  //generowanie tokenu - zwraca jedynie status 200, ale ustawia cookies
   login(
     @UserID() id: number,
     @UserName() firstName: string,

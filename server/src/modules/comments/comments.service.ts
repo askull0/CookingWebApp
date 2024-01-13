@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -41,7 +41,7 @@ export class CommentsService {
     });
   }
 
-  async addComment(data: CreateCommentDto) {
+  async addComment(data: CreateCommentDto, userId: number) {
     const recipe = await this.prisma.recipes.findUnique({
       where: { id: data.recipesId },
     });
@@ -50,17 +50,19 @@ export class CommentsService {
     return this.prisma.comment.create({
       data: {
         text: data.text,
-        authorId: data.authorId,
+        authorId: userId,
         recipesId: data.recipesId,
       },
     });
   }
 
-  async deleteComment(id: number) {
+  async deleteComment(id: number, userId: number) {
     const commment = await this.prisma.comment.findUnique({
       where: { id: id },
     });
     if (!commment) return null;
-    else return this.prisma.comment.delete({ where: { id: id } });
+    if (commment.authorId == userId) {
+      return this.prisma.comment.delete({ where: { id: id } });
+    } else throw new ConflictException();
   }
 }
