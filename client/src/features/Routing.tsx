@@ -6,6 +6,7 @@ import {CulinaryRecipes} from "../components/CulinaryRecipes";
 import {RegisterPage} from "./register/RegisterPage";
 import {useIsLogged} from "../hooks/useIsLogged";
 import {LogInPage} from "./login/LogInPage";
+import { MyProfile } from './myProfile/MyProfile';
 
 const publicRoutes: RouteObject[] = [ //gdy uzytkownik jest poprawnie uwierzytelniony
     {
@@ -46,8 +47,8 @@ const privateRoutes: RouteObject[] = [
                 element: <CulinaryRecipes/>
             },
             {
-                path: '/myaccount',
-                //element:
+                path: '/myprofile',
+                element: <MyProfile/>
             },
             {
                 path: '/new',
