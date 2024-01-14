@@ -14,11 +14,17 @@ export class CommentsService {
           select: {
             firstName: true,
             lastName: true,
+            id: true,
           },
         },
+        recipes: {
+          select: {
+            name: true,
+            id: true,
+          },
+        },
+        id:true,
         text: true,
-        authorId: true,
-        recipesId: true,
         publishedDate: true,
       },
     });
@@ -31,10 +37,10 @@ export class CommentsService {
           select: {
             firstName: true,
             lastName: true,
+            id: true,
           },
         },
         text: true,
-        authorId: true,
         recipesId: true,
         publishedDate: true,
       },

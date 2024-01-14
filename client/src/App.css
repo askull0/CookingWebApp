@@ -1,4 +1,5 @@
 body {
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     font-family: Helvetica, sans-serif;
@@ -31,6 +32,8 @@ body {
 }
 
 .footer {
+    position: absolute;
+    bottom: 0;
     background: linear-gradient(to right, #39b257, #027926);
     color: #fff;
     text-align: center;
@@ -81,6 +84,10 @@ body {
 
 
 @media all and (max-width: 600px) {
+    body {
+        min-width: 600px;
+        overflow-x: hidden;
+    }
     .header {
         font-size: 24px;
         padding: 15px;
@@ -105,4 +112,9 @@ body {
     .sign-in {
         width: 50%;
     }
+}
+.FooterCentered_footer__mc3xD{
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
 }
