@@ -1,23 +1,34 @@
 import React, {useState} from "react";
 import {Button, Input, message, Modal, Rate} from "antd";
 import axios from "axios";
+import {useIsLogged} from "../hooks/useIsLogged";
+import {useNavigate} from "react-router-dom";
 
 interface CommentButtonProps {
     id: number | undefined;
 }
 
 export const CommentButton: React.FC<CommentButtonProps> = ({id}) => {
+    const isLogged = useIsLogged();
+    const navigate = useNavigate();
     const [modalVisible, setModalVisible] = useState(false);
     const [comment, setComment] = useState('');
     const showModal = () => {
-        setModalVisible(true);
+        if (isLogged) {
+            setModalVisible(true);
+        } else {
+            navigate('/login');
+        }
     };
 
     const handleOk = async () => {
+        const commentRecipeDto = {
+            text: comment,
+            recipesId: id,
+        };
         try {
-            const response = await axios.put(`/rating/`, {
-                comment
-            });
+            const response = await axios.post(`/comments/`, commentRecipeDto
+            );
             console.log("Response from backend:", response.data);
             message.success("Thank you for your comment!");
             setComment('');

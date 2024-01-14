@@ -1,6 +1,5 @@
-import {ActionIcon, Box, Button, NumberInput, Textarea, TextInput, Modal} from "@mantine/core";
+import {Box, Button, Modal, NumberInput, Textarea, TextInput} from "@mantine/core";
 import {useForm} from "@mantine/form";
-import {IconSquareX} from "@tabler/icons-react";
 import {useNavigate} from "react-router-dom";
 import axios, {AxiosResponse} from "axios";
 import {useState} from "react";
@@ -100,12 +99,8 @@ export const RecipeForm = () => {
                     </Button>
                 </form>
             </Box>
-            <ActionIcon onClick={() => navigate('/')} className="icon-x" variant="filled" aria-label="Settings"
-                        color="#027926">
-                <IconSquareX style={{width: '70%', height: '70%'}} stroke={1.5}/>
-            </ActionIcon>
             <Modal
-                title="Dodano nowy przepis!!"
+                title="New recipe added!!"
                 opened={modalOpen}
                 onClose={closeModal}
                 size="md"
