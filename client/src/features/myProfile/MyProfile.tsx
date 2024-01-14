@@ -1,6 +1,6 @@
 import React from 'react';
 import './myprofile.css';
-import { CommentOutlined, ProfileOutlined, UserOutlined} from '@ant-design/icons';
+import { CommentOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons';
 import { Tabs } from 'antd';
 import { MyComments } from './MyComments';
 import { MyRecipes } from './MyRecipes';
@@ -16,6 +16,7 @@ export const MyProfile = () => {
 
   return (
     <div className="main-content">
+      <h2 className="myprofile-title-h2">Your account</h2>
       <Tabs className="main-tab"
         defaultActiveKey="2"
         items={tabsData.map((tab, i) => {

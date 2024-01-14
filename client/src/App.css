@@ -11,10 +11,11 @@ body {
     justify-content: space-between;
     color: #fff;
     text-align: center;
-    padding: 30px;
+    padding: 20px;
     font-size: 36px;
     border-bottom: 2px solid #027926; /*199640*/
     font-family: "Bookman Old Style", sans-serif;
+    height: 15vh;
 }
 
 .header-right {
@@ -28,7 +29,8 @@ body {
     font-size: 18px;
     line-height: 1.6;
     text-align: center;
-    background: linear-gradient(to right, #cef6da, #6c9f7c); /*a2c2ab*/
+    background-color: whitesmoke;
+    /*background: linear-gradient(to right, #cef6da, #6c9f7c); !*a2c2ab*!*/
 }
 
 .footer {
@@ -109,12 +111,5 @@ body {
         width: 130%;
     }
 
-    .sign-in {
-        width: 50%;
-    }
-}
-.FooterCentered_footer__mc3xD{
-    position: absolute;
-    width: 100vw;
-    bottom: 0;
+
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './myprofile.css';
-import { MessageOutlined} from '@ant-design/icons';
-import { Avatar, Button, List, message, Popconfirm } from 'antd';
+import { MessageOutlined } from '@ant-design/icons';
+import { Avatar, List } from 'antd';
 import axios from 'axios';
 import { showNotification } from '@mantine/notifications';
 import { PopConfirm } from './PopConfirm';

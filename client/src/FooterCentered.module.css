@@ -2,6 +2,9 @@
     background-color: #278f41;
     padding: 10px;
     border-top: 2px solid #027926;
+    height: 10vh;
+    /*position: sticky;*/
+    /*bottom: 0;*/
 }
 
 .logo1 {

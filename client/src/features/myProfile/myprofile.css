@@ -1,8 +1,10 @@
 
 .main-content{
     display: flex;
+    /*justify-content: space-evenly;*/
     align-items: center;
-    justify-content: space-evenly;
+    height: 75vh;
+    flex-direction: column;
 }
 
 
@@ -44,4 +46,22 @@
 
 .ant-btn-default:hover{
     color: #027926;
+}
+
+.ant-btn-primary{
+    background: #027926;
+}
+
+.ant-list .ant-list-item .ant-list-item-action>li{
+    color:darkgreen;
+    margin-right:5px;
+}
+
+.list-recipe-description{
+    display: flex;
+    flex-direction: column;
+}
+
+.myprofile-title-h2{
+    color:darkgreen;
 }
