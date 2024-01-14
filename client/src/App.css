@@ -1,20 +1,15 @@
 body {
-    min-height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: Helvetica, sans-serif;
 }
 
 .header {
-    background: linear-gradient(to right, #39b257, #027926);
+    background: radial-gradient(circle, rgba(0,77,13,1) 0%, rgba(3,102,1,1) 40%, rgba(56,138,0,1) 84%);
     display: flex;
     justify-content: space-between;
     color: #fff;
-    text-align: center;
     padding: 20px;
-    font-size: 36px;
-    border-bottom: 2px solid #027926; /*199640*/
-    font-family: "Bookman Old Style", sans-serif;
+    /*border-bottom: 2px solid #027926; !*!*199640*!*!*/
     height: 15vh;
 }
 
@@ -29,13 +24,21 @@ body {
     font-size: 18px;
     line-height: 1.6;
     text-align: center;
-    background-color: whitesmoke;
+    background-image: url('../public/homepage-bg.jpeg');
+    background-repeat: no-repeat ;
+    background-color: #cccccc;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    height: 100vh;
+    color:white;
+    /*background-color: whitesmoke;*/
     /*background: linear-gradient(to right, #cef6da, #6c9f7c); !*a2c2ab*!*/
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
+    /*position: absolute;*/
+    /*bottom: 0;*/
     background: linear-gradient(to right, #39b257, #027926);
     color: #fff;
     text-align: center;
@@ -49,14 +52,21 @@ body {
 }
 
 .logo {
-    width: 40px;
+    width: auto;
     height: auto;
     margin-right: 15px;
+    transition: opacity 0.4s;
+}
+
+.logo:hover{
+    opacity: 70%;
 }
 
 .search {
     margin: 10px 20px 10px 20px;
+    height: 75vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -68,12 +78,18 @@ body {
 }
 
 .filters {
-    margin: 5px 20px 20px 20px;
+    margin: 15px 20px 20px 20px;
     display: flex;
     gap: 10px;
     justify-content: center;
     align-items: center;
     font-size: 14px;
+    color: white;
+    font-weight: 500;
+}
+
+.ant-input-group .ant-input{
+    font-weight: 500;
 }
 
 .icon {
@@ -113,3 +129,48 @@ body {
 
 
 }
+
+.header-page-title{
+    margin: auto;
+    font-size: 36px;
+    font-family: "Arial", fantasy;
+    text-align: center;
+}
+
+.header-home-page{
+    color: white;
+    font-style: oblique;
+}
+
+.ant-collapse{
+    margin: 180px 20vw 50px 20vw;
+/*    display:grid;*/
+/*    grid-template-columns: repeat(2, 1fr); !* Powtarzaj 3 kolumny, każda zajmuje równy udział *!*/
+/*    gap: 16px; */
+}
+
+
+.ant-card .ant-card-body {
+    padding: 10px;
+    border-radius: 14px;
+    background-color: whitesmoke;
+    width: 60vw;
+}
+
+.ant-divider-horizontal {
+    margin: 5px;
+}
+
+.ant-card {
+    border-radius: 14px;
+    width: 60vw;
+    margin:auto;
+}
+
+.ant-form-item .ant-form-item-label >label{
+    color:white;
+}
+.ant-form-item{
+    color:white;
+}
+

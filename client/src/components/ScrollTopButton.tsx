@@ -29,7 +29,7 @@ export const ScrollToTopButton = () => {
             onClick={scrollToTop}
             style={{
                 position: 'fixed',
-                bottom: '60px',
+                bottom: '11vh',
                 right: '20px',
                 cursor: 'pointer',
                 display: isVisible ? 'block' : 'none',

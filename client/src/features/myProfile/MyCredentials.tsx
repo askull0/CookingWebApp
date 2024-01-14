@@ -32,7 +32,7 @@ export const MyCredentials = () => {
   return (
     <div>
       <Space direction="vertical" size={16}>
-        <Card title="About me" extra={<Avatar icon={<UserOutlined/>} />} style={{ width: 300 }}>
+        <Card className="card-credentials" title="About me" extra={<Avatar icon={<UserOutlined/>} />} style={{ width: 300 }}>
           <p> <b>Email</b>: {myCred?.email}</p>
           <p> <b>Name</b>: {myCred?.firstName}</p>
           <p> <b>Surname</b>: {myCred?.lastName}</p>

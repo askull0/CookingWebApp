@@ -14,22 +14,32 @@ interface SearchCulinaryRecipesProps {
 }
 
 export const SearchCulinaryRecipes: React.FC<SearchCulinaryRecipesProps> = ({
-                                                                                setSearchFilter,
-                                                                                setSortFilter,
-                                                                                setPickFilter
-                                                                            }) => {
+     setSearchFilter,
+     setSortFilter,
+     setPickFilter
+
+ }) => {
+  const scrollDown = () => {
+    window.scrollTo({
+      top: window.scrollY + 700,
+      behavior: 'smooth'
+    });
+  }
+
     const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
         setSearchFilter(value);
+        scrollDown();
     };
 
     return (
         <div>
-            <div className="search">
+            <div className="search-for-recipes">
                 <Space direction="vertical">
-                    <Search placeholder="search culinary recipes" onSearch={onSearch} className="search-input"/>
+                    <Search placeholder="search for culinary recipes" onSearch={onSearch} className="search-input"/>
                 </Space>
+              <Filters setSortFilter={setSortFilter} setPickFilter={setPickFilter}/>
             </div>
-            <Filters setSortFilter={setSortFilter} setPickFilter={setPickFilter}/>
+
         </div>
     );
 };

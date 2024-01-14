@@ -1,11 +1,12 @@
 .footer {
-    background-color: #278f41;
+    background: radial-gradient(circle, rgba(0,77,13,1) 0%, rgba(3,102,1,1) 40%, rgba(56,138,0,1) 84%);
     padding: 10px;
-    border-top: 2px solid #027926;
     height: 10vh;
-    /*position: sticky;*/
-    /*bottom: 0;*/
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
+
 
 .logo1 {
     width: 40px;

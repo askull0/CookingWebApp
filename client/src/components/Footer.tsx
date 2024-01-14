@@ -1,7 +1,7 @@
 import {Anchor, Group, ActionIcon, rem} from '@mantine/core';
-import {IconBrandTwitter, IconBrandYoutube, IconBrandInstagram} from '@tabler/icons-react';
+import {IconBrandTelegram, IconBrandYoutube, IconBrandInstagram} from '@tabler/icons-react';
 import classes from '../FooterCentered.module.css';
-import logoImage from "../gnome-logo.png";
+import logoImage from "../logo.png";
 
 const links = [
     {link: '#', label: 'Contact'},
@@ -15,7 +15,7 @@ export const Footer = () => {
         )*/
     const items = links.map((link) => (
         <Anchor
-            c="dimmed"
+            c="white"
             key={link.label}
             href={link.link}
             lh={1}
@@ -37,18 +37,14 @@ export const Footer = () => {
                     </Group>
 
                     <Group gap="xs" justify="flex-end">
-                        <ActionIcon size="lg" variant="default" radius="xl"
-                                    style={{background: 'linear-gradient(to right, #cef6da, #6c9f7c)'}}>
-                            <IconBrandTwitter style={{width: rem(18), height: rem(18)}}
-                                              stroke={1.5}/>
+                        <ActionIcon size="lg" radius="xl" style={{background:"none"}}>
+                            <IconBrandTelegram style={{width: rem(25), height: rem(25)}} />
                         </ActionIcon>
-                        <ActionIcon size="lg" variant="default" radius="xl"
-                                    style={{background: 'linear-gradient(to right, #cef6da, #6c9f7c)'}}>
-                            <IconBrandYoutube style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
+                        <ActionIcon size="lg" radius="xl" style={{background:"none"}}>
+                            <IconBrandYoutube style={{width: rem(25), height: rem(25)}} />
                         </ActionIcon>
-                        <ActionIcon size="lg" variant="default" radius="xl"
-                                    style={{background: 'linear-gradient(to right, #cef6da, #6c9f7c)'}}>
-                            <IconBrandInstagram style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
+                        <ActionIcon size="lg"  radius="xl" style={{background:"none"}}>
+                            <IconBrandInstagram style={{width: rem(25), height: rem(25)}}/>
                         </ActionIcon>
                     </Group>
                 </Group>

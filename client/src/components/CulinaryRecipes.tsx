@@ -129,6 +129,7 @@ export const CulinaryRecipes = () => {
     return (
         <div className="content">
             <div className="search">
+                <h2 className="header-home-page">Search or scroll down</h2>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                     <SearchCulinaryRecipes setSearchFilter={setSearchFilter} setSortFilter={setSortFilter}
                                            setPickFilter={setPickFilter}/>
