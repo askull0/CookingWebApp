@@ -5,6 +5,7 @@ import './App.css';
 import '@mantine/core/styles.css';
 import {createTheme, MantineProvider} from "@mantine/core";
 import {Notifications} from "@mantine/notifications";
+import {AuthProvider} from "./context/AuthProvider";
 
 const theme = createTheme({
     /** Put your mantine theme override here */
@@ -12,12 +13,14 @@ const theme = createTheme({
 
 function App() {
     return (
-        <MantineProvider theme={theme}>
-            <Notifications/>
-            <BrowserRouter>
-                <Routing/>
-            </BrowserRouter>
-        </MantineProvider>
+        <AuthProvider>
+            <MantineProvider theme={theme}>
+                <Notifications/>
+                <BrowserRouter>
+                    <Routing/>
+                </BrowserRouter>
+            </MantineProvider>
+        </AuthProvider>
     );
 }
 

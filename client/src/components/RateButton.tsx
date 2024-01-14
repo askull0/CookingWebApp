@@ -1,16 +1,24 @@
 import React, {useState} from "react";
 import {Button, Input, message, Modal, Rate} from "antd";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import {useIsLogged} from "../hooks/useIsLogged";
 
 interface RateButtonProps {
     id: number | undefined;
 }
 
 export const RateButton: React.FC<RateButtonProps> = ({id}) => {
+    const isLogged = useIsLogged();
+    const navigate = useNavigate();
     const [modalVisible, setModalVisible] = useState(false);
     const [ratingValue, setRatingValue] = useState(0);
     const showModal = () => {
-        setModalVisible(true);
+        if (isLogged) {
+            setModalVisible(true);
+        } else {
+            navigate('/login');
+        }
     };
 
     const handleOk = async () => {

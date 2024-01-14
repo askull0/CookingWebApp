@@ -118,7 +118,7 @@ export const CulinaryRecipes = () => {
                         </div>
                     </div>
                     <div>
-                        <DisplayComment/>
+                        <DisplayComment id={recipe.id}/>
                     </div>
                 </>
             ),

@@ -6,7 +6,7 @@ import {CulinaryRecipes} from "../components/CulinaryRecipes";
 import {RegisterPage} from "./register/RegisterPage";
 import {useIsLogged} from "../hooks/useIsLogged";
 import {LogInPage} from "./login/LogInPage";
-import { MyProfile } from './myProfile/MyProfile';
+import {MyProfile} from './myProfile/MyProfile';
 
 const publicRoutes: RouteObject[] = [ //gdy uzytkownik jest poprawnie uwierzytelniony
     {
@@ -42,6 +42,10 @@ const privateRoutes: RouteObject[] = [
         path: '/', //element[Layout] oblugujacy sekcje glowna - elemnt nadredny
         element: <Layout/>,
         children: [ //koncowe strony
+            {
+                path: '/',
+                element: <Navigate to="/recipe" replace/>,
+            },
             {
                 path: '/recipe',
                 element: <CulinaryRecipes/>
