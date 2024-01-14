@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, Form, Input} from 'antd';
 import {Link, useNavigate} from "react-router-dom";
-import {useForm} from "@mantine/form";
 import {login} from "./api/login";
 import {loginErrorNotification} from "./notifications";
 
@@ -12,12 +11,6 @@ type FieldType = {
 
 export const LogInPage = () => {
     const navigate = useNavigate();
-    /*    const form = useForm<FieldType>({
-            initialValues: {
-                login: "",
-                password: ""
-            }
-        })*/
     const handleSubmit = async (data: FieldType) => {
         try {
             await login(data.login, data.password);
@@ -27,14 +20,12 @@ export const LogInPage = () => {
         }
     }
     return (
-        <div className="content">
+        <div className="content" style={{height: '75vh'}}>
             <h2>Sign in</h2>
             <Form
                 className="sign-in"
                 name="basic"
-                labelCol={{span: 8}}
-                wrapperCol={{span: 16}}
-                style={{maxWidth: 500, margin: 'auto'}}
+                style={{maxWidth: 450, margin: 'auto'}}
                 onFinish={(values) => handleSubmit(values)}
                 autoComplete="off"
             >
@@ -57,7 +48,6 @@ export const LogInPage = () => {
 
                 <Form.Item
                     className="sign-in"
-                    wrapperCol={{offset: 8, span: 16}}
                 >
                     <Button type="primary" htmlType="submit">
                         Submit
@@ -66,7 +56,6 @@ export const LogInPage = () => {
 
                 <Form.Item
                     className="sign-in"
-                    wrapperCol={{offset: 8, span: 16}}
                 >
                     Don't have an account? <Link to="/register">Register now</Link>
                 </Form.Item>
