@@ -1,14 +1,15 @@
 import React, {useState} from "react";
-import {Button, Input, message, Modal, Rate} from "antd";
+import {Button, message, Modal, Rate} from "antd";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useIsLogged} from "../hooks/useIsLogged";
 
 interface RateButtonProps {
-    id: number | undefined;
+    id: number;
+    onReviewsChange: (recipeId: number, newRating: number, newReviews: number) => void;
 }
 
-export const RateButton: React.FC<RateButtonProps> = ({id}) => {
+export const RateButton: React.FC<RateButtonProps> = ({id, onReviewsChange}) => {
     const isLogged = useIsLogged();
     const navigate = useNavigate();
     const [modalVisible, setModalVisible] = useState(false);
@@ -29,6 +30,7 @@ export const RateButton: React.FC<RateButtonProps> = ({id}) => {
             const response = await axios.put(`recipes/rating/${id}`, rateRecipeDto);
             console.log("Response from backend:", response.data);
             message.success("Thank you for your rating!");
+            onReviewsChange(id, response.data.rating, response.data.reviews);
             setRatingValue(0);
 
             setModalVisible(false);

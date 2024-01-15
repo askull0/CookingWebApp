@@ -5,6 +5,7 @@ import React from "react";
 import {registerErrorNotification} from "./notifications_register";
 import axios from "axios";
 import {login} from "../login/api/login";
+import {notification} from "antd";
 
 export const RegisterPage = () => {
     const navigate = useNavigate();
@@ -26,12 +27,19 @@ export const RegisterPage = () => {
                 !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? 'Invalid email address' : null,
         },
     });
+    const openRegisterNotification = () => {
+        notification.success({
+            message: 'Register successful',
+            description: 'You have been successfully registered.',
+        });
+    };
 
     const handleSubmit = async () => {
         try {
             const {firstName, lastName, email, password} = form.values;
             const response = await axios.post('/users', {firstName, lastName, email, password});
             await login(email, password);
+            openRegisterNotification();
             navigate('/recipe');
 
         } catch (error) {

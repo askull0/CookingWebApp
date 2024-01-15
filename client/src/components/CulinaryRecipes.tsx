@@ -7,16 +7,14 @@ import {ActionIcon} from "@mantine/core";
 import {SearchCulinaryRecipes} from "../features/Recipe/SearchCulinaryRecipes";
 import {IconBaguette, IconBurger, IconEggs, IconFlame, IconTablePlus} from "@tabler/icons-react";
 import {useNavigate} from "react-router-dom";
-/*import axios from '../axios.js';*/
 import {ScrollToTopButton} from "./ScrollTopButton";
 import {RateButton} from "./RateButton";
 import {CommentButton} from "./CommentButton";
 import {DisplayComment} from "./DisplayComment";
 import axios from "axios";
 
-
 interface Recipe {
-    id?: number;
+    id: number;
     name: string;
     rating: number;
     description: string;
@@ -36,7 +34,21 @@ export const CulinaryRecipes = () => {
     const [sortFilter, setSortFilter] = useState<string | null>(null);
     const [pickFilter, setPickFilter] = useState<string | null>(null);
 
-    //aktulizacja
+    const handleRateChange = (recipeId: number, newRating: number, newReviews: number) => {
+        console.log("New Rating and Reviews from handle:", newRating, newReviews);
+        setRecipes((prevRecipes) =>
+            prevRecipes.map((recipe) =>
+                recipe.id === recipeId ? {...recipe, rating: newRating, reviews: newReviews} : recipe
+            )
+        );
+    };
+    const handleCommentChange = (recipeId: number, newComment: Comment[]) => {
+        setRecipes((prevRecipes) =>
+            prevRecipes.map((recipe) =>
+                recipe.id === recipeId ? {...recipe, comments: newComment} : recipe
+            )
+        );
+    };
 
     const panelStyle: React.CSSProperties = {
         marginBottom: 24,
@@ -99,7 +111,7 @@ export const CulinaryRecipes = () => {
                     </div>
                     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                         <div style={{display: 'flex', alignItems: 'center'}}>
-                            <Rate disabled defaultValue={recipe.rating} style={{marginRight: '6px'}}/>
+                            <Rate disabled value={recipe.rating} style={{marginRight: '6px'}}/>
                             <span>({recipe.reviews})</span>
                         </div>
 
@@ -112,13 +124,15 @@ export const CulinaryRecipes = () => {
 
                         <div style={{display: 'flex', alignItems: 'center'}}>
                             <div style={{display: 'flex', marginRight: '8px'}}>
-                                <RateButton id={recipe.id}/>
+                                <RateButton id={recipe.id} onReviewsChange={handleRateChange}/>
                             </div>
-                            <CommentButton id={recipe.id}/>
+                            {/*  <CommentButton id={recipe.id}/>*/}
+                            <CommentButton id={recipe.id} onAddComment={handleCommentChange}/>
                         </div>
                     </div>
                     <div>
-                        <DisplayComment id={recipe.id}/>
+                        {/*   <DisplayComment id={recipe.id}/>*/}
+                        <DisplayComment id={recipe.id} onAddComment={handleCommentChange}/>
                     </div>
                 </>
             ),
