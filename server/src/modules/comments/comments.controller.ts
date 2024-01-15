@@ -1,16 +1,12 @@
 import {
   Body,
-  ConflictException,
   Controller,
   Delete,
   Get,
-  HttpCode,
-  HttpStatus,
   NotFoundException,
   Param,
   ParseIntPipe,
   Post,
-  Res,
   UseGuards,
 } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
@@ -20,28 +16,24 @@ import { plainToInstance } from 'class-transformer';
 import { TokenGuard } from '../auth/guards/token.guard';
 import { UserID } from '../auth/decorators/userdId.decorator';
 import { rethrow } from '@nestjs/core/helpers/rethrow';
-import { Response } from 'express';
 
 @Controller('comments')
 export class CommentsController {
   constructor(private readonly commentService: CommentsService) {}
 
   // jesli user nie ma komentarzy lub id usera niepoprawne to zwraca not found
-  @Get('user/')
+  @Get('user')
   @UseGuards(TokenGuard)
-  async findByUser(@UserID() id: number, @Res() res: Response) {
+  async findByUser(@UserID() id: number) {
     const comment = await this.commentService.getByUser(id);
-    if (comment.length == 0) res.status(HttpStatus.NO_CONTENT).send();
+    // if (comment.length == 0) res.status(HttpStatus.NO_CONTENT).send();
     return comment;
   }
 
   @Get('recipe/:id')
-  async findByRecipe(
-    @Param('id', ParseIntPipe) id: number,
-    @Res() res: Response,
-  ) {
+  async findByRecipe(@Param('id', ParseIntPipe) id: number) {
     const comment = await this.commentService.getByRecipe(id);
-    if (comment.length == 0) res.status(HttpStatus.NO_CONTENT).send();
+    // if (comment.length == 0) res.status(HttpStatus.NO_CONTENT).send();
     return comment;
   }
 
