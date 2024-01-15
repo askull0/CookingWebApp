@@ -16,7 +16,7 @@ import axios from "axios";
 
 
 interface Recipe {
-    id?: number;
+    id: number;
     name: string;
     rating: number;
     description: string;
@@ -37,6 +37,13 @@ export const CulinaryRecipes = () => {
     const [pickFilter, setPickFilter] = useState<string | null>(null);
 
     //aktulizacja
+    const handleReviewsChange = (recipeId: number, newReviews: number) => {
+        setRecipes((prevRecipes) =>
+            prevRecipes.map((recipe) =>
+                recipe.id === recipeId ? {...recipe, reviews: newReviews} : recipe
+            )
+        );
+    };
 
     const panelStyle: React.CSSProperties = {
         marginBottom: 24,
@@ -112,7 +119,7 @@ export const CulinaryRecipes = () => {
 
                         <div style={{display: 'flex', alignItems: 'center'}}>
                             <div style={{display: 'flex', marginRight: '8px'}}>
-                                <RateButton id={recipe.id}/>
+                                <RateButton id={recipe.id} onReviewsChange={handleReviewsChange}/>
                             </div>
                             <CommentButton id={recipe.id}/>
                         </div>
