@@ -6,9 +6,10 @@ import {useNavigate} from "react-router-dom";
 
 interface CommentButtonProps {
     id: number | undefined;
+    onAddComment: (recipeId: number, newComment: Comment[]) => void;
 }
 
-export const CommentButton: React.FC<CommentButtonProps> = ({id}) => {
+export const CommentButton: React.FC<CommentButtonProps> = ({id, onAddComment}) => {
     const isLogged = useIsLogged();
     const navigate = useNavigate();
     const [modalVisible, setModalVisible] = useState(false);
@@ -21,6 +22,10 @@ export const CommentButton: React.FC<CommentButtonProps> = ({id}) => {
         }
     };
 
+    /*    const handleAddComment = (newComment) => {
+            setComments([...comments, newComment]);
+        };*/
+
     const handleOk = async () => {
         const commentRecipeDto = {
             text: comment,
@@ -31,6 +36,7 @@ export const CommentButton: React.FC<CommentButtonProps> = ({id}) => {
             );
             console.log("Response from backend:", response.data);
             message.success("Thank you for your comment!");
+            onAddComment(response.data.id, response.data);
             setComment('');
 
             setModalVisible(false);

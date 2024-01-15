@@ -6,7 +6,7 @@ import {useIsLogged} from "../hooks/useIsLogged";
 
 interface RateButtonProps {
     id: number;
-    onReviewsChange: (recipeId: number, newReviews: number) => void;
+    onReviewsChange: (recipeId: number, newRating: number, newReviews: number) => void;
 }
 
 export const RateButton: React.FC<RateButtonProps> = ({id, onReviewsChange}) => {
@@ -30,7 +30,7 @@ export const RateButton: React.FC<RateButtonProps> = ({id, onReviewsChange}) => 
             const response = await axios.put(`recipes/rating/${id}`, rateRecipeDto);
             console.log("Response from backend:", response.data);
             message.success("Thank you for your rating!");
-            onReviewsChange(id, response.data.reviews);
+            onReviewsChange(id, response.data.rating, response.data.reviews);
             setRatingValue(0);
 
             setModalVisible(false);

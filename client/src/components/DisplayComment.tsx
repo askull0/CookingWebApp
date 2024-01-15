@@ -6,9 +6,10 @@ import {Divider} from 'antd';
 
 interface CommentProps {
     id: number | undefined;
+    onAddComment: (recipeId: number, newComment: Comment[]) => void;
 }
 
-interface Comment {
+interface Comment_get {
     author: {
         firstName: string;
         lastName: string;
@@ -18,25 +19,29 @@ interface Comment {
 }
 
 
-export const DisplayComment: React.FC<CommentProps> = ({id}) => {
+export const DisplayComment: React.FC<CommentProps> = ({id, onAddComment}) => {
     const [opened, {toggle}] = useDisclosure(false);
-    const [comments, setComments] = useState<Comment[]>([]);
+    const [comments, setComments] = useState<Comment_get[]>([]);
 
     useEffect(() => {
         const fetchComments = async () => {
             try {
                 const response = await axios.get(`/comments/recipe/${id}`);
-                if (response.status !== 404)
+                if (response.status !== 404) {
                     setComments(response.data);
-            } catch (error) {
-                if (error === 404) {
-                    console.log("brak komenatrzy");
                 }
-                //console.error("Error fetching comments:", error);
+            } catch (error) {
+                if (axios.isAxiosError(error) && error.response && error.response.status === 404) {
+                    setComments([]);
+                } else {
+                    console.error("Error fetching comments:", error);
+                }
             }
         };
         fetchComments();
-    }, [id]);
+    }, [id, comments]);
+
+
     return (
         <Box maw={400} mx="auto" mt={10}>
             <Group justify="center" mb={5}>
