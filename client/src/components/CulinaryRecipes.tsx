@@ -142,8 +142,11 @@ export const CulinaryRecipes = () => {
                         <IconTablePlus style={{width: '70%', height: '70%'}} stroke={1.5}/>
                     </ActionIcon>
                 </Tooltip>
-            </div>
 
+            </div>
+            <div className="recipes">
+
+            </div>
             <Collapse
                 bordered={false}
                 expandIcon={({isActive}) => <CaretRightOutlined rotate={isActive ? 90 : 0}/>}

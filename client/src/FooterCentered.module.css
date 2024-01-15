@@ -1,8 +1,8 @@
 .footer {
-    background: radial-gradient(circle, rgba(0,77,13,1) 0%, rgba(3,102,1,1) 40%, rgba(56,138,0,1) 84%);
+    background: radial-gradient(circle, rgba(0, 77, 13, 0.93) 0%, rgba(3,102,1,1) 40%, rgba(56,138,0,1) 84%);
     padding: 10px;
     height: 10vh;
-    position: fixed;
+    /*position: fixed;*/
     bottom: 0;
     width: 100%;
 }

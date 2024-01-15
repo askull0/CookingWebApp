@@ -70,55 +70,57 @@ export const RecipeForm = () => {
 
     return (
         <div className="content">
-            Please add new recipe
+            <div className="recipe-form-container">
+                <b>Add new recipe</b>
 
-            <Box maw={340} mx="auto">
-                <form onSubmit={(e) => {
-                    e.preventDefault();
-                    form.onSubmit(handleSubmit)();
-                }}>
-                    <TextInput mt="sm" label="Recipe Name"
-                               placeholder="Enter recipe name" {...form.getInputProps('recipeName')} />
-                    <Textarea mt="sm" label="Description"
-                              placeholder="Enter recipe description"
-                              {...form.getInputProps('description')}
-                    />
-                    <NumberInput mt="sm" label="Cooking Time (minutes)"
-                                 min={0}  {...form.getInputProps('cookingTime')}
-                    />
-                    <Box mt="sm" style={{display: 'flex', gap: '8px'}}>
-                        <NumberInput label="Fat" min={0} {...form.getInputProps('fat')} />
-                        <NumberInput label="Carbs" min={0} {...form.getInputProps('carbs')} />
-                        <NumberInput label="Protein" min={0} {...form.getInputProps('protein')} />
-                    </Box>
-                    <NumberInput mt="sm" label="Calories"
-                                 min={0}  {...form.getInputProps('calories')}
-                    />
-                    <Button type="submit" mt="md" color="#027926">
-                        Submit
-                    </Button>
-                </form>
-            </Box>
-            <Modal
-                title="New recipe added!!"
-                opened={modalOpen}
-                onClose={closeModal}
-                size="md"
-            >
-                {selectedRecipe && (
-                    <div className="content">
-                        <div>Name: {selectedRecipe.name}</div>
-                        <div>Description: {selectedRecipe.description}</div>
-                        <div>Total Time: {selectedRecipe.totalTime} minutes</div>
-                        <div>Calories: {selectedRecipe.calories}</div>
-                        <div>Fat: {selectedRecipe.fat}</div>
-                        <div>Carbs: {selectedRecipe.carbs}</div>
-                        <div>Protein: {selectedRecipe.protein}</div>
-                        <div>Rating: {selectedRecipe.rating}</div>
-                        <div>Reviews: {selectedRecipe.reviews}</div>
-                    </div>
-                )}
-            </Modal>
+                <Box maw={340} mx="auto">
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        form.onSubmit(handleSubmit)();
+                    }}>
+                        <TextInput mt="sm" label="Recipe Name"
+                                   placeholder="Enter recipe name" {...form.getInputProps('recipeName')} />
+                        <Textarea mt="sm" label="Description"
+                                  placeholder="Enter recipe description"
+                                  {...form.getInputProps('description')}
+                        />
+                        <NumberInput mt="sm" label="Cooking Time (minutes)"
+                                     min={0}  {...form.getInputProps('cookingTime')}
+                        />
+                        <Box mt="sm" style={{display: 'flex', gap: '8px'}}>
+                            <NumberInput label="Fat" min={0} {...form.getInputProps('fat')} />
+                            <NumberInput label="Carbs" min={0} {...form.getInputProps('carbs')} />
+                            <NumberInput label="Protein" min={0} {...form.getInputProps('protein')} />
+                        </Box>
+                        <NumberInput mt="sm" label="Calories"
+                                     min={0}  {...form.getInputProps('calories')}
+                        />
+                        <Button type="submit" mt="md" color="#027926">
+                            Submit
+                        </Button>
+                    </form>
+                </Box>
+                <Modal
+                    title="New recipe added!!"
+                    opened={modalOpen}
+                    onClose={closeModal}
+                    size="md"
+                >
+                    {selectedRecipe && (
+                        <div className="content">
+                            <div>Name: {selectedRecipe.name}</div>
+                            <div>Description: {selectedRecipe.description}</div>
+                            <div>Total Time: {selectedRecipe.totalTime} minutes</div>
+                            <div>Calories: {selectedRecipe.calories}</div>
+                            <div>Fat: {selectedRecipe.fat}</div>
+                            <div>Carbs: {selectedRecipe.carbs}</div>
+                            <div>Protein: {selectedRecipe.protein}</div>
+                            <div>Rating: {selectedRecipe.rating}</div>
+                            <div>Reviews: {selectedRecipe.reviews}</div>
+                        </div>
+                    )}
+                </Modal>
+            </div>
         </div>
 
     )

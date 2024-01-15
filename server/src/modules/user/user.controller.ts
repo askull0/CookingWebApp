@@ -3,10 +3,12 @@ import {
   Controller,
   Delete,
   Get,
+  HttpStatus,
   NotFoundException,
   Param,
   ParseIntPipe,
   Post,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
@@ -16,7 +18,7 @@ import { plainToInstance } from 'class-transformer';
 import { UserDto } from './dto/user.dto';
 import { UserID } from '../auth/decorators/userdId.decorator';
 import { TokenGuard } from '../auth/guards/token.guard';
-import { RecipeNotfoundException } from '../../exceptions/recipe-notfound-exception';
+import { Response } from 'express';
 
 @Controller('users')
 export class UserController {
@@ -43,9 +45,9 @@ export class UserController {
 
   @Get('/recipes')
   @UseGuards(TokenGuard)
-  async getRecipesByUserId(@UserID() id: number) {
+  async getRecipesByUserId(@UserID() id: number, @Res() res: Response) {
     const recipes = await this.userService.findMyRecipes(id);
-    if (recipes.length == 0) throw new RecipeNotfoundException();
+    if (recipes.length == 0) res.status(HttpStatus.NO_CONTENT).send();
     return recipes;
   }
 
