@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Input, message, Modal, Rate} from "antd";
+import {Button, Input, message, Modal} from "antd";
 import axios from "axios";
 import {useIsLogged} from "../hooks/useIsLogged";
 import {useNavigate} from "react-router-dom";
@@ -21,10 +21,6 @@ export const CommentButton: React.FC<CommentButtonProps> = ({id, onAddComment}) 
             navigate('/login');
         }
     };
-
-    /*    const handleAddComment = (newComment) => {
-            setComments([...comments, newComment]);
-        };*/
 
     const handleOk = async () => {
         const commentRecipeDto = {

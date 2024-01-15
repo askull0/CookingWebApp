@@ -64,7 +64,7 @@ export const DisplayComment: React.FC<CommentProps> = ({id, onAddComment}) => {
                                     width: '700px',
                                 }}>
                                 <strong>{comment.author.firstName} {comment.author.lastName}</strong> ({new Date(comment.publishedDate).toLocaleString()})
-                                <Divider/>
+                                <Divider style={{margin: '5px', borderColor: "whitesmoke"}}/>
                                 <div>{comment.text}</div>
                             </div>
                         </div>

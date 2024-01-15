@@ -1,9 +1,9 @@
 
-.main-content{
+.main-content {
     display: flex;
     /*justify-content: space-evenly;*/
     align-items: center;
-    height: 75vh;
+    min-height: 75vh;
     flex-direction: column;
 }
 
@@ -11,19 +11,21 @@
 .ant-tabs-nav .ant-tabs-tab {
     color: #39b257;
 }
+
 .ant-tabs-nav .ant-tabs-tab:hover {
     color: #046523;
 }
-.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
     color: #046523;
 }
 
-.ant-avatar{
+.ant-avatar {
     background-color: rgba(121, 72, 72, 0);
     color: #027926;
 }
 
-.ant-tabs{
+.ant-tabs {
     justify-content: center;
     margin: 15px;
     padding: 5px;
@@ -35,33 +37,34 @@
     flex-direction: column;
     justify-content: center;
 }
+
 .ant-list-item-meta-description .ant-list-item-meta-title {
     justify-content: center;
 }
 
-.ant-btn-default{
+.ant-btn-default {
     border-color: #9b0000;
     color: #9b0000;
 }
 
-.ant-btn-default:hover{
+.ant-btn-default:hover {
     color: #027926;
 }
 
-.ant-btn-primary{
+.ant-btn-primary {
     background: #027926;
 }
 
-.ant-list .ant-list-item .ant-list-item-action>li{
-    color:darkgreen;
-    margin-right:5px;
+.ant-list .ant-list-item .ant-list-item-action > li {
+    color: darkgreen;
+    margin-right: 5px;
 }
 
-.list-recipe-description{
+.list-recipe-description {
     display: flex;
     flex-direction: column;
 }
 
-.myprofile-title-h2{
-    color:darkgreen;
+.myprofile-title-h2 {
+    color: darkgreen;
 }
