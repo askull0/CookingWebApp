@@ -210,3 +210,6 @@ body {
 .ant-form-item{
     color: #027826;
 }
+.ant-rate .ant-rate-star-second{
+    color: rgba(133, 133, 133, 0.72);
+}

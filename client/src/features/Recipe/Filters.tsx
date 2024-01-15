@@ -1,8 +1,8 @@
 import {Combobox, InputBase, Input, useCombobox} from "@mantine/core";
 import React, {useState} from "react";
 
-const options1 = {increasing: "Increasing", decreasing: "Decreasing",};
-const options2 = {rating: "Rating", reviews: "Reviews", calories: "Calories",};
+const options1 = {increasing: "increasing", decreasing: "decreasing",};
+const options2 = {rating: "rating", reviews: "reviews", calories: "calories",};
 
 interface FiltersProps {
     setSortFilter: React.Dispatch<React.SetStateAction<string | null>>;
@@ -34,10 +34,23 @@ export const Filters: React.FC<FiltersProps> = ({setSortFilter, setPickFilter}) 
         </Combobox.Option>
     ));
 
-    const handleConfirmClick = () => {
-        setSortFilter(sortingValue);
-        setPickFilter(otherSortingValue);
+    const handleSortFilter = (val:string) => {
+        if(val == options1.decreasing){
+          setSortFilter('desc')
+        }
+
+        else if(val == options1.increasing)
+          setSortFilter('asc');
     };
+
+  const handlePickFilter = (val:string) => {
+    if(val == options2.calories)
+      setPickFilter('calories')
+    else if(val == options2.rating)
+      setPickFilter('rating');
+    else if(val  == options2.reviews)
+      setPickFilter('reviews');
+  };
 
     return (
         <div className="filters">
@@ -46,6 +59,7 @@ export const Filters: React.FC<FiltersProps> = ({setSortFilter, setPickFilter}) 
                 store={sortingCombobox}
                 onOptionSubmit={(val) => {
                     setSortingValue(val);
+                    handleSortFilter(val);
                     sortingCombobox.closeDropdown();
                 }}
 
@@ -73,6 +87,7 @@ export const Filters: React.FC<FiltersProps> = ({setSortFilter, setPickFilter}) 
                 store={otherSortingCombobox}
                 onOptionSubmit={(val) => {
                     setOtherSortingValue(val);
+                    handlePickFilter(val);
                     otherSortingCombobox.closeDropdown();
                 }}
             >

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { List, Space } from 'antd';
+import { List, Space, Tooltip } from 'antd';
 import { PopConfirm } from './PopConfirm';
-import { IconBaguette, IconBurger, IconEggs, IconFlame } from '@tabler/icons-react';
+import { IconBaguette, IconBurger, IconEggs, IconFlame, IconTablePlus } from '@tabler/icons-react';
 import { ClockCircleOutlined } from '@ant-design/icons';
 import { showNotification } from '@mantine/notifications';
+import { ActionIcon } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 
 const showCustomNotification = (color: string, title: string, message: string) => {
   const notification = showNotification({
@@ -29,7 +31,7 @@ interface Recipe {
 
 export const MyRecipes = () => {
   const [recipesTab, setRecipes] = useState<Recipe[]>([]);
-
+  const navigate = useNavigate();
   //pobieranie z bazy przepisow uzytkownika
   const fetchRecipes = async () => {
     try {
@@ -81,31 +83,43 @@ export const MyRecipes = () => {
   }
 
   return(
-    <List
-      itemLayout="horizontal"
-      dataSource={recipesTab}
-      renderItem={(item: Recipe) => (
-        <List.Item
-          key={item.id}
-          actions={[
-            <IconText myIcon={IconFlame} count={item.calories} key="list-calories" />,
-            <IconText myIcon={IconBurger} count={item.fat} key="list-fat" />,
-            <IconText myIcon={IconBaguette} count={item.carbs} key="list-carbs" />,
-            <IconText myIcon={IconEggs} count={item.protein} key="list-protein" />,
-            <PopConfirm onClick={() => handleDelete(item.id)} toDelete={"recipe"}></PopConfirm>
-          ]}>
-          <List.Item.Meta
-            title={item.name}
-            description={<Description
-              text={item.description}
-              time={item.totalTime}
-              rating={{rate:item.rating, reviews:item.reviews}}/>}
-          />
+    <div>
 
-        </List.Item>
-      )}
+      <List
+        itemLayout="horizontal"
+        dataSource={recipesTab}
+        renderItem={(item: Recipe) => (
+          <List.Item
+            key={item.id}
+            actions={[
+              <IconText myIcon={IconFlame} count={item.calories} key="list-calories" />,
+              <IconText myIcon={IconBurger} count={item.fat} key="list-fat" />,
+              <IconText myIcon={IconBaguette} count={item.carbs} key="list-carbs" />,
+              <IconText myIcon={IconEggs} count={item.protein} key="list-protein" />,
+              <PopConfirm onClick={() => handleDelete(item.id)} toDelete={"recipe"}></PopConfirm>
+            ]}>
+            <List.Item.Meta
+              title={item.name}
+              description={<Description
+                text={item.description}
+                time={item.totalTime}
+                rating={{rate:item.rating, reviews:item.reviews}}/>}
+            />
 
-    />
+          </List.Item>
+        )}
+      />
+      <div style={{display:'flex', justifyContent:'center'}}>
+        <Tooltip title="Add new recipe">
+          <ActionIcon onClick={() => navigate('/new')} className="icon" variant="filled" color="#027926"
+                      size="lg"
+                      radius="md"
+                      aria-label="Settings">
+            <IconTablePlus style={{width: '70%', height: '70%'}} stroke={1.5}/>
+          </ActionIcon>
+        </Tooltip>
+      </div>
 
+    </div>
   );
 };

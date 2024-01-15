@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {CaretRightOutlined, ClockCircleOutlined} from '@ant-design/icons';
 import type {CollapseProps} from 'antd';
 import {Collapse, Rate, theme, Tooltip} from 'antd';
-import {ActionIcon} from "@mantine/core";
+import { ActionIcon, keys } from '@mantine/core';
 import {SearchCulinaryRecipes} from "../features/Recipe/SearchCulinaryRecipes";
 import {IconBaguette, IconBurger, IconEggs, IconFlame, IconTablePlus} from "@tabler/icons-react";
 import {useNavigate} from "react-router-dom";
@@ -30,7 +30,9 @@ export const CulinaryRecipes = () => {
     const {token} = theme.useToken();
     const navigate = useNavigate();
     const [recipes, setRecipes] = useState<Recipe[]>([]);
+
     const [searchFilter, setSearchFilter] = useState<string | null>(null);
+
     const [sortFilter, setSortFilter] = useState<string | null>(null);
     const [pickFilter, setPickFilter] = useState<string | null>(null);
 
@@ -60,20 +62,21 @@ export const CulinaryRecipes = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('/recipes', {
+                const response = await axios.get('recipes', {
                     params: {
+                        sortBy: pickFilter,
+                        sortOrder: sortFilter,
                         search: searchFilter,
-                        sort: sortFilter,
-                        pick: pickFilter,
                     },
                 });
-                setRecipes(response.data);
+                setRecipes(response.data, );
             } catch (error) {
                 console.log(error);
             }
         };
         fetchData();
     }, [searchFilter, sortFilter, pickFilter]);
+
 
     const getItems: (panelStyle: CSSProperties) => CollapseProps['items'] = (panelStyle) => {
         return recipes.map((recipe, index) => ({
@@ -126,12 +129,10 @@ export const CulinaryRecipes = () => {
                             <div style={{display: 'flex', marginRight: '8px'}}>
                                 <RateButton id={recipe.id} onReviewsChange={handleRateChange}/>
                             </div>
-                            {/*  <CommentButton id={recipe.id}/>*/}
                             <CommentButton id={recipe.id} onAddComment={handleCommentChange}/>
                         </div>
                     </div>
                     <div>
-                        {/*   <DisplayComment id={recipe.id}/>*/}
                         <DisplayComment id={recipe.id} onAddComment={handleCommentChange}/>
                     </div>
                 </>

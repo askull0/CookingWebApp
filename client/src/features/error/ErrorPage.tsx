@@ -14,7 +14,7 @@ export function ErrorPage() {
           </Text>
           <Group justify="center">
               <Button onClick={() => navigate('/')} variant="subtle" size="md">
-                  Take me back to home page
+                  Take me home country road ...
               </Button>
           </Group>
       </Container>
