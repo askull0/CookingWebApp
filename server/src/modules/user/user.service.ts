@@ -45,7 +45,11 @@ export class UserService {
       where: { id: id },
     });
     if (!recipe) return null;
+
     if (recipe.userId == userId) {
+      await this.prisma.comment.deleteMany({
+        where: { recipesId: id },
+      });
       return this.prisma.recipes.delete({ where: { id: id } });
     } else throw new ConflictException();
   }
