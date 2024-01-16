@@ -37,7 +37,7 @@ export const ScrollToTopButton = () => {
                 zIndex: 9999
             }}
         >
-            <IconSquareRoundedArrowUpFilled style={{width: '30px', height: '30px'}}/>
+            <IconSquareRoundedArrowUpFilled style={{width: '50px', height: '50px'}}/>
         </div>
     );
 };

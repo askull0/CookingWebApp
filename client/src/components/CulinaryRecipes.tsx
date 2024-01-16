@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {CaretRightOutlined, ClockCircleOutlined} from '@ant-design/icons';
 import type {CollapseProps} from 'antd';
 import {Collapse, Rate, theme, Tooltip} from 'antd';
-import { ActionIcon, keys } from '@mantine/core';
+import {ActionIcon} from '@mantine/core';
 import {SearchCulinaryRecipes} from "../features/Recipe/SearchCulinaryRecipes";
 import {IconBaguette, IconBurger, IconEggs, IconFlame, IconTablePlus} from "@tabler/icons-react";
 import {useNavigate} from "react-router-dom";
@@ -69,7 +69,7 @@ export const CulinaryRecipes = () => {
                         search: searchFilter,
                     },
                 });
-                setRecipes(response.data, );
+                setRecipes(response.data,);
             } catch (error) {
                 console.log(error);
             }
@@ -95,19 +95,19 @@ export const CulinaryRecipes = () => {
                             marginBottom: '12px',
                         }}>
                         <span style={{margin: '0 14px'}}>
-                        <IconFlame style={{marginRight: '5px', color: 'darkgreen'}} size="1rem"
-                                   stroke={2}/>{recipe.calories} cal
+                        <IconFlame style={{marginRight: '5px', color: 'lightgreen'}} size="1rem"
+                                   stroke={2}/>{recipe.calories} kcal
                     </span>
                         <span style={{margin: '0 14px'}}>
-                        <IconBurger style={{marginRight: '5px', color: 'darkgreen'}} size="1rem"
+                        <IconBurger style={{marginRight: '5px', color: 'lightgreen'}} size="1rem"
                                     stroke={2}/>{recipe.fat} g fat
                     </span>
                         <span style={{margin: '0 14px'}}>
-                        <IconBaguette style={{marginRight: '5px', color: 'darkgreen'}} size="1rem"
+                        <IconBaguette style={{marginRight: '5px', color: 'lightgreen'}} size="1rem"
                                       stroke={2}/>{recipe.carbs} g carbs
                     </span>
                         <span style={{margin: '0 14px'}}>
-                        <IconEggs style={{marginRight: '5px', color: 'darkgreen'}} size="1rem"
+                        <IconEggs style={{marginRight: '5px', color: 'lightgreen'}} size="1rem"
                                   stroke={2}/>{recipe.protein} g protein
                     </span>
 
@@ -133,7 +133,7 @@ export const CulinaryRecipes = () => {
                         </div>
                     </div>
                     <div>
-                        <DisplayComment id={recipe.id} onAddComment={handleCommentChange}/>
+                        <DisplayComment id={recipe.id}/>
                     </div>
                 </>
             ),

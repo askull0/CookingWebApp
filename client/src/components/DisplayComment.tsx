@@ -6,7 +6,6 @@ import {Divider} from 'antd';
 
 interface CommentProps {
     id: number | undefined;
-    onAddComment: (recipeId: number, newComment: Comment[]) => void;
 }
 
 interface Comment_get {
@@ -19,7 +18,7 @@ interface Comment_get {
 }
 
 
-export const DisplayComment: React.FC<CommentProps> = ({id, onAddComment}) => {
+export const DisplayComment: React.FC<CommentProps> = ({id}) => {
     const [opened, {toggle}] = useDisclosure(false);
     const [comments, setComments] = useState<Comment_get[]>([]);
 

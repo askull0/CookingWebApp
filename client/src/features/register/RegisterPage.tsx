@@ -2,10 +2,9 @@ import {useForm} from '@mantine/form';
 import {PasswordInput, Group, Button, Box, TextInput} from '@mantine/core';
 import {Link, useNavigate} from "react-router-dom";
 import React from "react";
-import {registerErrorNotification} from "./notifications_register";
 import axios from "axios";
 import {login} from "../login/api/login";
-import {notification} from "antd";
+import {message} from "antd";
 
 export const RegisterPage = () => {
     const navigate = useNavigate();
@@ -27,24 +26,18 @@ export const RegisterPage = () => {
                 !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? 'Invalid email address' : null,
         },
     });
-    const openRegisterNotification = () => {
-        notification.success({
-            message: 'Register successful',
-            description: 'You have been successfully registered.',
-        });
-    };
 
     const handleSubmit = async () => {
         try {
             const {firstName, lastName, email, password} = form.values;
             const response = await axios.post('/users', {firstName, lastName, email, password});
             await login(email, password);
-            openRegisterNotification();
-            navigate('/recipe');
+            message.success('You have been successfully registered.')
+            navigate('/');
 
         } catch (error) {
             console.error('Registration error:', error);
-            registerErrorNotification();
+            message.error('User with this email already exist');
         }
     };
     return (
@@ -90,7 +83,7 @@ export const RegisterPage = () => {
                     />
 
                     <Group mt="md" style={{justifyContent: 'center'}}>
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit" style={{backgroundColor: 'green'}}>Submit</Button>
                     </Group>
                 </form>
                 <p style={{textAlign: 'center', marginTop: '16px'}}>
