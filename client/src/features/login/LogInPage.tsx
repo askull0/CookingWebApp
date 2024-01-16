@@ -1,8 +1,7 @@
 import React from 'react';
-import {Button, Form, Input, notification} from 'antd';
+import {Button, Form, Input, message, notification} from 'antd';
 import {Link, useNavigate} from "react-router-dom";
 import {login} from "./api/login";
-import {loginErrorNotification} from "./notifications";
 
 type FieldType = {
     login: string;
@@ -14,7 +13,7 @@ export const LogInPage = () => {
     const openLoginNotification = () => {
         notification.success({
             message: 'Login successful',
-            description: 'You have been successfully logged in.',
+            description: '',
         });
     };
     const handleSubmit = async (data: FieldType) => {
@@ -23,7 +22,7 @@ export const LogInPage = () => {
             openLoginNotification();
             navigate('/recipe');
         } catch (error) {
-            loginErrorNotification();
+            message.error('Login failed');
         }
     }
     return (
